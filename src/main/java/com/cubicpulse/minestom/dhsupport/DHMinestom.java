@@ -24,7 +24,7 @@ public class DHMinestom {
         var eventNode = EventNode.all("DHMinestom");
         eventNode.addListener(PlayerSpawnEvent.class, event -> {
             // If the player is switching worlds and has a config, update the LevelInit for the player
-            if (!event.isFirstSpawn() && event.getPlayer().hasTag(DH_REMOTE_PLAYER_CONFIG)) {
+            if (event.getPlayer().hasTag(DH_REMOTE_PLAYER_CONFIG)) {
                 var config = event.getPlayer().getTag(DH_REMOTE_PLAYER_CONFIG);
                 pmh.handleConfig(event.getPlayer(), config);
             }

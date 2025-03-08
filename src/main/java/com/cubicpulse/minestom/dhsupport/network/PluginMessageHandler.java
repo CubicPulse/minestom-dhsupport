@@ -100,7 +100,11 @@ public class PluginMessageHandler {
             log.error("No config found for player {}", player.getUsername());
             return;
         }
+        player.setTag(DHMinestom.DH_REMOTE_PLAYER_CONFIG, config);
         
+        if (player.getInstance() == null) {
+            return;
+        }
         var instance = player.getInstance();
         var instanceId = getInstanceUuid(instance);
         DHLevelInitMessage levelInitMessage = new DHLevelInitMessage(
@@ -108,7 +112,6 @@ public class PluginMessageHandler {
                 System.currentTimeMillis()
         );
         log.debug("Sending level init message to player {}: {}", player.getUsername(), levelInitMessage);
-        player.setTag(DHMinestom.DH_REMOTE_PLAYER_CONFIG, config);
         sendPluginMessage(player, DHLevelInitMessage.SERIALIZER, levelInitMessage);
         
         var db = instance.getTag(DHMinestom.DH_DB);
